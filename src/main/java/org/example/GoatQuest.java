@@ -11,6 +11,7 @@ public class GoatQuest extends YaegerGame
     public static void main( String[] args )
     {
         int tien = 10;
+        int twintig = 21;
         launch(args);
     }
 
