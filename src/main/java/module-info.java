@@ -3,6 +3,11 @@ module Goat.Quest {
 
     exports org.example;
 
+    opens decoration;
+    opens goatSprite;
+    opens obstacles;
+    opens tiles;
+
 
 
 
