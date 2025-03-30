@@ -11,31 +11,42 @@ import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
 import org.example.entities.map.GrassBlock;
 
-import java.io.Serializable;
+
 import java.util.List;
 import java.util.Set;
 
 public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided {
 
     GoatQuest goatQuest;
+    private boolean isOnGround;
+
 
     public Goat(Coordinate2D initialLocation, GoatQuest goatQuest) {
         super("goatSprite/Goat_normal.png", initialLocation, new Size(50, 50));
         this.goatQuest = goatQuest;
         setFrictionConstant(0.05);
         setGravityConstant(0.5);
+        isOnGround = false;
+
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
-        if (pressedKeys.contains(KeyCode.LEFT)) {
-            setMotion(3, 270d);
-            setCurrentFrameIndex(0);
-        } else if (pressedKeys.contains(KeyCode.RIGHT)) {
-            setMotion(3, 90d);
-            setCurrentFrameIndex(1);
-        } else if (pressedKeys.contains(KeyCode.UP)) {
-            setMotion(3, 180d);
+        if (isOnGround) {
+            if (pressedKeys.contains(KeyCode.A)) {
+                setMotion(3, 270d);
+                setCurrentFrameIndex(0);
+            } else if (pressedKeys.contains(KeyCode.D)) {
+                setMotion(3, 90d);
+                setCurrentFrameIndex(1);
+            } else {
+                setMotion(0, 0);
+            }
+        }
+        // Het Geitje kan alleen springen als hij op de grond is (zo vliegt hij niet)
+        if (pressedKeys.contains(KeyCode.SPACE) && isOnGround) {
+            setMotion(10, 180d);
+            isOnGround = false;
         }
 
     }
@@ -43,14 +54,14 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     @Override
     public void onCollision(List<Collider> list) {
         var grassCollision = false;
-
+        isOnGround = false;
         for (Collider collider : list) {
             if (collider instanceof GrassBlock) {
                 grassCollision = true;
+                isOnGround = true;
+                setMotion(0, 0);
+                break;
             }
-        }
-        if (grassCollision) {
-            setMotion(0, 180d);
         }
     }
 }
