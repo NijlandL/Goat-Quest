@@ -22,7 +22,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
 
     public Goat(Coordinate2D initialLocation, GoatQuest goatQuest) {
-        super("goatSprite/Goat_normal.png", initialLocation, new Size(50, 50));
+        super("goatSprite/goatFullSprite.png", initialLocation, new Size(50, 50), 1, 2);
         this.goatQuest = goatQuest;
         setFrictionConstant(0.05);
         setGravityConstant(0.5);
