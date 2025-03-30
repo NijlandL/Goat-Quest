@@ -36,8 +36,6 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             setCurrentFrameIndex(1);
         } else if (pressedKeys.contains(KeyCode.UP)) {
             setMotion(3, 180d);
-        } else if (pressedKeys.contains(KeyCode.DOWN)) {
-            setMotion(3, 0d);
         }
 
     }
@@ -52,7 +50,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             }
         }
         if (grassCollision) {
-            setAnchorLocationY(480);
+            setMotion(0, 180d);
         }
     }
 }

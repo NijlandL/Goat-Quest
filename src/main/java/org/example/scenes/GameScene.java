@@ -8,6 +8,8 @@ import org.example.GoatQuest;
 import org.example.entities.goat.Goat;
 import org.example.entities.map.GrassTilemap;
 
+import java.awt.*;
+
 public class GameScene extends DynamicScene implements TileMapContainer {
 
     private GoatQuest goatQuest;

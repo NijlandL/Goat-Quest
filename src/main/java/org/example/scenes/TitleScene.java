@@ -22,10 +22,13 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        var startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2 - 55, getHeight()/2), "Start Game", Color.WHITE);
+        var startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2 - 80, getHeight()/2), "Start Game", Color.WHITE);
         addEntity(startButton);
 
-        var quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2 - 55, getHeight()/2 + 50), "Quit Game", Color.WHITE);
+        var quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2 - 80, getHeight()/2 + 50), "Quit Game", Color.WHITE);
         addEntity(quitButton);
+
+        var GameTitle = new GameTitle(new Coordinate2D(getWidth()/2-100, getHeight()/2 - 200), goatQuest);
+        addEntity(GameTitle);
     }
 }
