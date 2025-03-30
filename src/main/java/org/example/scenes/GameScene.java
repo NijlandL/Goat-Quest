@@ -2,9 +2,12 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import com.github.hanyaeger.api.scenes.TileMap;
+import com.github.hanyaeger.api.scenes.TileMapContainer;
 import org.example.GoatQuest;
+import org.example.entities.map.GrassTilemap;
 
-public class GameScene extends DynamicScene {
+public class GameScene extends DynamicScene implements TileMapContainer {
 
     private GoatQuest goatQuest;
 
@@ -20,5 +23,11 @@ public class GameScene extends DynamicScene {
     @Override
     public void setupEntities() {
 
+    }
+
+    @Override
+    public void setupTileMaps() {
+        var GrassTileMap = new GrassTilemap();
+        addTileMap(GrassTileMap);
     }
 }
