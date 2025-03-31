@@ -4,6 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
+import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.userinput.KeyListener;
@@ -17,8 +18,13 @@ import java.util.Set;
 
 public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided {
 
+    private static final int WALKING_SPEED = 3;
+    private static final int JUMP_SPEED = 10;
+
     GoatQuest goatQuest;
-    private boolean isOnGround;
+    private boolean isOnGround = false;
+    private double direction = Direction.RIGHT.getValue();
+    private Set<KeyCode> latestPressedKeys;
 
 
     public Goat(Coordinate2D initialLocation, GoatQuest goatQuest) {
@@ -26,30 +32,33 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         this.goatQuest = goatQuest;
         setFrictionConstant(0.05);
         setGravityConstant(0.5);
-        isOnGround = false;
+
 
     }
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
-        if (isOnGround) {
-            if (pressedKeys.contains(KeyCode.A)) {
-                setMotion(3, 270d);
-                setCurrentFrameIndex(0);
-            } else if (pressedKeys.contains(KeyCode.D)) {
-                setMotion(3, 90d);
-                setCurrentFrameIndex(1);
-            } else {
-                setMotion(0, 0);
-            }
-        }
-        // Het Geitje kan alleen springen als hij op de grond is (zo vliegt hij niet)
+        this.latestPressedKeys = pressedKeys;
+
         if (pressedKeys.contains(KeyCode.SPACE) && isOnGround) {
-            setMotion(10, 180d);
+            addToMotion(JUMP_SPEED, Direction.UP);
             isOnGround = false;
         }
 
+        if (pressedKeys.contains(KeyCode.D)) {
+            direction = Direction.RIGHT.getValue();
+            maximizeMotionInDirection(direction, WALKING_SPEED);
+            setCurrentFrameIndex(1);
+        } else if (pressedKeys.contains(KeyCode.A)) {
+            direction = Direction.LEFT.getValue();
+            maximizeMotionInDirection(direction, WALKING_SPEED);
+            setCurrentFrameIndex(0);
+        } else if (isOnGround) {
+            // Alleen stoppen als op de grond
+            setSpeed(0);
+        }
     }
+
 
     @Override
     public void onCollision(List<Collider> list) {
