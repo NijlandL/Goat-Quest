@@ -19,7 +19,7 @@ import java.util.Set;
 public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided {
 
     private static final int WALKING_SPEED = 3;
-    private static final int JUMP_SPEED = 10;
+    private static final int JUMP_SPEED = 15;
 
     GoatQuest goatQuest;
     private boolean isOnGround = false;
@@ -61,17 +61,40 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
 
     @Override
-    public void onCollision(List<Collider> list) {
-        var grassCollision = false;
+    public void onCollision(List<Collider> colliders) {
+        // Begin elke frame met de aanname dat de goat in de lucht is.
         isOnGround = false;
-        for (Collider collider : list) {
-            if (collider instanceof GrassBlock) {
-                grassCollision = true;
-                isOnGround = true;
-                setMotion(0, 0);
-                break;
+
+        // Loop door alle objecten waarmee de goat op dat moment botst.
+        for (Collider collider : colliders) {
+            // Controleer of het een GrassBlock is
+            if (collider instanceof GrassBlock grassBlock) {
+
+                // Bepaal de onderkant (Y) van de goat
+                double goatBottom = getBoundingBox().getMaxY();
+                // Bepaal de bovenkant (Y) van het grass block
+                double blockTop = grassBlock.getBoundingBox().getMinY();
+
+                // Controleer of de goat van boven op het blok komt (dus niet tegen de zijkant of onderkant)
+                // De +10 is een kleine marge om ervoor te zorgen dat lichte overlappingen door snelheid niet fout gaan
+                if (goatBottom <= blockTop + 10) {
+                    // Geef aan dat de goat op de grond staat
+                    isOnGround = true;
+
+                    // Stop de verticale beweging (vallen / springen)
+                    setMotion(0, 0);
+
+                    // Behoud de huidige snelheid (vooral handig als hij horizontaal beweegt)
+                    // setSpeed(getSpeed()) is een beetje dubbel, je zou ook alleen de verticale snelheid op 0 kunnen zetten
+                    setSpeed(getSpeed());
+
+                    // Eén grass block is genoeg om op te staan, dus we stoppen de lus
+                    break;
+                }
             }
         }
     }
+
 }
+
 
