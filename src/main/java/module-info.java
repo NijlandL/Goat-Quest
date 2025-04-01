@@ -10,7 +10,7 @@ module Goat.Quest {
     opens obstacles;
     opens tiles;
     opens wolfSprite;
-
+    opens music;
 
 
 
