@@ -8,6 +8,8 @@ import com.github.hanyaeger.api.userinput.MouseExitListener;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.example.GoatQuest;
 
 public abstract class Button extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
@@ -16,6 +18,8 @@ public abstract class Button extends TextEntity implements MouseButtonPressedLis
     public Button(GoatQuest goatQuest, Coordinate2D initialLocation, String text){
         super(initialLocation,text);
         this.goatQuest = goatQuest;
+        setFill(Color.WHITE);
+        setFont(Font.font("Roboto", FontWeight.BOLD, 30));
     }
 
 
