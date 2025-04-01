@@ -1,75 +1,39 @@
-package org.example.entities.goat;
+package org.example.entities.enemies;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Direction;
 import com.github.hanyaeger.api.entities.Newtonian;
+import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-import com.github.hanyaeger.api.userinput.KeyListener;
-import javafx.scene.input.KeyCode;
-import org.example.GoatQuest;
+import com.github.hanyaeger.api.scenes.SceneBorder;
 import org.example.entities.map.GrassBlock;
-import org.example.text.HealthText;
 
 
 import java.util.List;
-import java.util.Set;
+import java.util.Random;
 
-public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided {
+public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatcher, Newtonian, Collided, Collider {
 
-    private static final int WALKING_SPEED = 3;
-    private static final int JUMP_SPEED = 15;
-
-    private HealthText healthText;
-    GoatQuest goatQuest;
-    private boolean isOnGround = false;
-    private double direction = Direction.RIGHT.getValue();
-    private int health = 3;
-    private Set<KeyCode> latestPressedKeys;
-
-
-    public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText) {
-        super("goatSprite/goatFullSprite.png", initialLocation, new Size(50, 50), 1, 2);
-        this.goatQuest = goatQuest;
-        this.healthText = healthText;
-        healthText.setHealthText(health);
-
+    public Wolf(Coordinate2D location) {
+        super("wolfSprite/wolf.png", location, new Size(50,50),1,2);
+        setMotion(2, 270d);
         setFrictionConstant(0.05);
         setGravityConstant(0.5);
-
 
     }
 
     @Override
-    public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
-        this.latestPressedKeys = pressedKeys;
-
-        if (pressedKeys.contains(KeyCode.SPACE) && isOnGround) {
-            addToMotion(JUMP_SPEED, Direction.UP);
-            isOnGround = false;
-        }
-
-        if (pressedKeys.contains(KeyCode.D)) {
-            direction = Direction.RIGHT.getValue();
-            maximizeMotionInDirection(direction, WALKING_SPEED);
-            setCurrentFrameIndex(1);
-        } else if (pressedKeys.contains(KeyCode.A)) {
-            direction = Direction.LEFT.getValue();
-            maximizeMotionInDirection(direction, WALKING_SPEED);
-            setCurrentFrameIndex(0);
-        } else if (isOnGround) {
-            // Alleen stoppen als op de grond
-            setSpeed(0);
-        }
+    public void notifyBoundaryCrossing(SceneBorder border) {
+        setAnchorLocationX(getSceneWidth());
+        setAnchorLocationY(new Random().nextInt((int) (getSceneHeight() - getHeight())));
     }
-
 
     @Override
     public void onCollision(List<Collider> colliders) {
         // Begin elke frame met de aanname dat de goat in de lucht is.
-        isOnGround = false;
+
 
         // Loop door alle objecten waarmee de goat op dat moment botst.
         for (Collider collider : colliders) {
@@ -85,7 +49,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 // De +10 is een kleine marge om ervoor te zorgen dat lichte overlappingen door snelheid niet fout gaan
                 if (goatBottom <= blockTop + 10) {
                     // Geef aan dat de goat op de grond staat
-                    isOnGround = true;
+
 
                     // Stop de verticale beweging (vallen / springen)
                     setMotion(0, 0);
@@ -100,7 +64,4 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             }
         }
     }
-
 }
-
-

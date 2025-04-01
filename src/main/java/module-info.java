@@ -9,6 +9,7 @@ module Goat.Quest {
     opens goatSprite;
     opens obstacles;
     opens tiles;
+    opens wolfSprite;
 
 
 
