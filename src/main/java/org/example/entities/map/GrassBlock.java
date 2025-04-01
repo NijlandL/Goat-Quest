@@ -12,6 +12,10 @@ public class GrassBlock extends SpriteEntity implements Collided, Collider {
 
     public GrassBlock(Coordinate2D location, Size size, String name) {
         super(name, location, size);
+
+
+
+
     }
 
     @Override
