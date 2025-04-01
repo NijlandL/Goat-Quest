@@ -10,6 +10,7 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
+import org.example.entities.enemies.Wolf;
 import org.example.entities.map.GrassBlock;
 import org.example.text.HealthText;
 
@@ -28,6 +29,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     private double direction = Direction.RIGHT.getValue();
     private int health = 3;
     private Set<KeyCode> latestPressedKeys;
+    private int damageCooldown = 60;
 
 
     public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText) {
@@ -59,48 +61,55 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             direction = Direction.LEFT.getValue();
             maximizeMotionInDirection(direction, WALKING_SPEED);
             setCurrentFrameIndex(0);
-        } else if (isOnGround) {
-            // Alleen stoppen als op de grond
+        } else if (isOnGround && !(pressedKeys.contains(KeyCode.D) || pressedKeys.contains(KeyCode.A))) {
             setSpeed(0);
+        }
+    }
+
+    public void takeDamage(int amount) {
+        if (damageCooldown == 0) {
+            health -= amount;
+            if (health < 0) {
+                health = 0;
+            }
+            healthText.setHealthText(health);
+            damageCooldown = 60;
         }
     }
 
 
     @Override
     public void onCollision(List<Collider> colliders) {
-        // Begin elke frame met de aanname dat de goat in de lucht is.
         isOnGround = false;
 
-        // Loop door alle objecten waarmee de goat op dat moment botst.
         for (Collider collider : colliders) {
-            // Controleer of het een GrassBlock is
             if (collider instanceof GrassBlock grassBlock) {
-
-                // Bepaal de onderkant (Y) van de goat
                 double goatBottom = getBoundingBox().getMaxY();
-                // Bepaal de bovenkant (Y) van het grass block
                 double blockTop = grassBlock.getBoundingBox().getMinY();
 
-                // Controleer of de goat van boven op het blok komt (dus niet tegen de zijkant of onderkant)
-                // De +10 is een kleine marge om ervoor te zorgen dat lichte overlappingen door snelheid niet fout gaan
                 if (goatBottom <= blockTop + 10) {
-                    // Geef aan dat de goat op de grond staat
                     isOnGround = true;
-
-                    // Stop de verticale beweging (vallen / springen)
                     setMotion(0, 0);
-
-                    // Behoud de huidige snelheid (vooral handig als hij horizontaal beweegt)
-                    // setSpeed(getSpeed()) is een beetje dubbel, je zou ook alleen de verticale snelheid op 0 kunnen zetten
                     setSpeed(getSpeed());
-
-                    // Eén grass block is genoeg om op te staan, dus we stoppen de lus
                     break;
                 }
             }
+
+            if (collider instanceof Wolf) {
+                takeDamage(1);
+            }
+        }
+
+        if (isOnGround && latestPressedKeys != null &&
+                (latestPressedKeys.contains(KeyCode.D) || latestPressedKeys.contains(KeyCode.A))) {
+            onPressedKeysChange(latestPressedKeys);
+        }
+
+        if (damageCooldown > 0) {
+            damageCooldown--;
         }
     }
-
 }
+
 
 

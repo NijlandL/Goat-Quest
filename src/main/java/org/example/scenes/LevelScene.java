@@ -17,7 +17,7 @@ public class LevelScene extends StaticScene {
 
     @Override
     public void setupScene() {
-        setBackgroundImage("backgroundImage.jpg");
+        setBackgroundImage("backgroundImage.png");
     }
 
     @Override

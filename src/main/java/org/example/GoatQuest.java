@@ -19,7 +19,7 @@ public class GoatQuest extends YaegerGame
     @Override
     public void setupGame() {
         setGameTitle("Goat Quest");
-        setSize(new Size(1920, 1080));
+        setSize(new Size(1280, 720));
     }
 
 

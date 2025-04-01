@@ -22,7 +22,7 @@ public class GameScene extends DynamicScene implements TileMapContainer {
 
     @Override
     public void setupScene() {
-        setBackgroundImage("backgroundImage.jpg");
+        setBackgroundImage("backgroundImage.png");
     }
 
     @Override
