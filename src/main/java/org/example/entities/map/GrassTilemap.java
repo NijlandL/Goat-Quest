@@ -1,5 +1,6 @@
 package org.example.entities.map;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.TileMap;
 
 public class GrassTilemap extends TileMap {
@@ -8,12 +9,12 @@ public class GrassTilemap extends TileMap {
 
     @Override
     public void setupEntities() {
-        addEntity(1, GrassBlock.class, "tiles/grasBlock_HighGras.png");
-        addEntity(2, GrassBlock.class, "tiles/grasBlock_LowGras.png");
-        addEntity(3, GrassBlock.class, "tiles/grasRampUp.png");
-        addEntity(4, GrassBlock.class, "tiles/grasRampDown.png");
-        addEntity(5, GrassBlock.class, "tiles/smallGrasBlock_LowGras.png");
-        addEntity(6, GrassBlock.class, "tiles/dirtBlock.png");
+//        addEntity(1, GrassBlock.class, "tiles/grasBlock_HighGras.png");
+        addEntity(2, GrassBlock.class);
+//        addEntity(3, GrassBlock.class, "tiles/grasRampUp.png");
+//        addEntity(4, GrassBlock.class, "tiles/grasRampDown.png");
+//        addEntity(5, GrassBlock.class, "tiles/smallGrasBlock_LowGras.png");
+//        addEntity(6, GrassBlock.class, "tiles/dirtBlock.png");
     }
 
 
@@ -27,10 +28,10 @@ public class GrassTilemap extends TileMap {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
         };
     }

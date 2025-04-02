@@ -11,6 +11,7 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import org.example.entities.goat.Goat;
 import org.example.entities.map.GrassBlock;
+import org.example.entities.map.GrassHitbox;
 
 import java.util.List;
 
@@ -40,14 +41,18 @@ public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatc
     @Override
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
-            if (collider instanceof GrassBlock grassBlock) {
-                double wolfBottom = getBoundingBox().getMaxY();
-                double blockTop = grassBlock.getBoundingBox().getMinY();
-
-                if (wolfBottom <= blockTop + 10) {
-                    setMotion(getSpeed(), getDirection()); // behoud snelheid
-                    break;
-                }
+//            if (collider instanceof GrassBlock grassBlock) {
+//                double wolfBottom = getBoundingBox().getMaxY();
+//                double blockTop = grassBlock.getBoundingBox().getMinY();
+//
+//                if (wolfBottom <= blockTop + 10) {
+//                    setMotion(getSpeed(), getDirection()); // behoud snelheid
+//                    break;
+//                }
+//            }
+            if (collider instanceof GrassHitbox){ //als wolf hitbox raakt dan blijft hij op de hitbox staan ipv de boundingbox van t grasblock
+//                System.out.println("GrassHitbox geraakt");
+                setMotion(getSpeed(), getDirection()); // behoud snelheid
             }
 
         }
