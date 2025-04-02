@@ -11,8 +11,8 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
 import org.example.entities.enemies.Wolf;
-import org.example.entities.map.GrassBlock;
-import org.example.entities.map.GrassHitbox;
+import org.example.entities.map.grassBlock.GrassHitbox;
+import org.example.entities.map.grassBlock.GrassTopHitbox;
 import org.example.text.HealthText;
 
 
@@ -84,26 +84,14 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         isOnGround = false;
 
         for (Collider collider : colliders) {
-            if (collider instanceof GrassHitbox){
-                System.out.println("GrassHitbox geraakt");
+            if (collider instanceof GrassTopHitbox){
+//                System.out.println("GrassTopHitbox geraakt");
                 isOnGround = true;
-                setMotion(0,180);
                 setSpeed(getSpeed());
+                setMotion(0,180);
+            } else if (collider instanceof GrassHitbox){
+                System.out.println("GrasBlock geraakt");
             }
-//            if (collider instanceof GrassBlock grassBlock) {
-//                double goatBottom = getBoundingBox().getMaxY();
-//                double blockTop = grassBlock.getBoundingBox().getMinY();
-
-//                if (goatBottom <= blockTop + 10) {
-//                    isOnGround = true;
-//                    setMotion(0, 0);
-//                    setSpeed(getSpeed());
-//                    break;
-//                } else {
-//                    System.out.println("In block");
-//                    setSpeed(-5);
-//                }
-//            }
 
             if (collider instanceof Wolf) {
                 takeDamage(1);

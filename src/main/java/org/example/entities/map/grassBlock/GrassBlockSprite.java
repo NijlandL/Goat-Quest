@@ -1,4 +1,4 @@
-package org.example.entities.map;
+package org.example.entities.map.grassBlock;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;

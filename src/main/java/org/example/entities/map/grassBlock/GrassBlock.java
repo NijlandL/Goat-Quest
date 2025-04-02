@@ -1,13 +1,9 @@
-package org.example.entities.map;
+package org.example.entities.map.grassBlock;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.CompositeEntity;
-import com.github.hanyaeger.api.entities.impl.SpriteEntity;
-
-import java.util.List;
 
 public class GrassBlock extends CompositeEntity implements Collider {
 
@@ -19,8 +15,10 @@ public class GrassBlock extends CompositeEntity implements Collider {
     protected void setupEntities() {
         GrassBlockSprite grasBlock = new GrassBlockSprite(new Coordinate2D(0,0));
         GrassHitbox hitbox = new GrassHitbox(new Coordinate2D(0,18), 64,50);
+        GrassTopHitbox hitboxTop = new GrassTopHitbox(new Coordinate2D(0,14),64,10);
         addEntity(grasBlock);
         addEntity(hitbox);
+        addEntity(hitboxTop);
 
     }
 }

@@ -31,7 +31,7 @@ public class GameScene extends DynamicScene implements TileMapContainer {
 
         var healthText = new HealthText(new Coordinate2D(0,0));
         addEntity(healthText);
-        var Goat = new Goat(new Coordinate2D(0,0),goatQuest,healthText);
+        var Goat = new Goat(new Coordinate2D(0,getHeight()-100),goatQuest,healthText);
         addEntity(Goat);
         var Wolf = new Wolf(new Coordinate2D(300,0));
         addEntity(Wolf);

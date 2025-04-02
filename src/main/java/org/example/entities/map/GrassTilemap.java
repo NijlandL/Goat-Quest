@@ -1,7 +1,7 @@
 package org.example.entities.map;
 
-import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.TileMap;
+import org.example.entities.map.grassBlock.GrassBlock;
 
 public class GrassTilemap extends TileMap {
 

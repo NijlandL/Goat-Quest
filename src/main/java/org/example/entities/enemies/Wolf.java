@@ -9,9 +9,7 @@ import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
-import org.example.entities.goat.Goat;
-import org.example.entities.map.GrassBlock;
-import org.example.entities.map.GrassHitbox;
+import org.example.entities.map.grassBlock.GrassHitbox;
 
 import java.util.List;
 

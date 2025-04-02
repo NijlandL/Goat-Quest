@@ -11,7 +11,7 @@ module Goat.Quest {
     opens tiles;
     opens wolfSprite;
     opens music;
-
+    exports org.example.entities.map.grassBlock;
 
 
 }
