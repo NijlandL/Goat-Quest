@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import org.example.GoatQuest;
 import org.example.entities.enemies.Wolf;
+import org.example.entities.enemies.Arend;
 import org.example.entities.goat.Goat;
 import org.example.entities.map.tileMaps.GrassTilemap;
 import org.example.entities.map.tileMaps.TilemapLevel1;
@@ -31,8 +32,12 @@ public abstract class Level extends DynamicScene implements TileMapContainer {
         addEntity(healthText);
         var Goat = new Goat(new Coordinate2D(0,getHeight()-100),goatQuest,healthText);
         addEntity(Goat);
-        var Wolf = new Wolf(new Coordinate2D(0,getHeight()-300));
+        var Wolf = new Wolf(new Coordinate2D(0,getHeight()-140));
         addEntity(Wolf);
+        var Arend = new Arend(new Coordinate2D(0,getHeight()-500));
+        addEntity(Arend);
+
+
 
     }
 

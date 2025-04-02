@@ -16,7 +16,6 @@ import java.util.List;
 public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatcher, Newtonian, Collided, Collider {
 
     private boolean movingRight = true;
-    private int damageCooldown = 0; // frames wachten voor nieuwe damage
 
     public Wolf(Coordinate2D location) {
         super("wolfSprite/wolf.png", location, new Size(64, 64), 1, 2);
@@ -28,11 +27,10 @@ public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatc
     @Override
     public void notifyBoundaryCrossing(SceneBorder border) {
         if (border == SceneBorder.LEFT || border == SceneBorder.RIGHT) {
-            // Draai om
             movingRight = !movingRight;
             double direction = movingRight ? Direction.RIGHT.getValue() : Direction.LEFT.getValue();
             setMotion(2, direction);
-            setCurrentFrameIndex(movingRight ? 0 : 1); // optioneel sprite omdraaien
+            setCurrentFrameIndex(movingRight ? 0 : 1);
         }
     }
 
