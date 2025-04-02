@@ -28,16 +28,16 @@ public class LevelScene extends StaticScene {
         var level1Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/4-interval, getHeight()/2), 1);
         addEntity(level1Button);
 
-        var level2Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/4*2-interval, getHeight()/2), 1);
+        var level2Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/4*2-interval, getHeight()/2), 2);
         addEntity(level2Button);
 
-        var level3Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/4*3-interval, getHeight()/2), 1);
+        var level3Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/4*3-interval, getHeight()/2), 3);
         addEntity(level3Button);
 
-        var level4Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/3-interval, getHeight()/3*2), 1);
+        var level4Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/3-interval, getHeight()/3*2), 4);
         addEntity(level4Button);
 
-        var level5Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/3*2-interval, getHeight()/3*2), 1);
+        var level5Button = new LevelButton(goatQuest, new Coordinate2D(getWidth()/3*2-interval, getHeight()/3*2), 5);
         addEntity(level5Button);
 
         var mainMenuButton = new MainMenuButton(goatQuest, new Coordinate2D(10,0));

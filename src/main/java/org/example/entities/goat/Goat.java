@@ -68,8 +68,9 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     public void takeDamage(int amount) {
         if (damageCooldown == 0) {
             health -= amount;
-            if (health < 0) {
-                health = 0;
+            if (health <= 0) {
+                goatQuest.setActiveScene(7);
+//                health = 0;
             }
             healthText.setHealthText(health);
             damageCooldown = 60;

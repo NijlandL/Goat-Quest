@@ -1,22 +1,20 @@
-package org.example.scenes;
+package org.example.scenes.levels;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
-import com.github.hanyaeger.api.scenes.TileMap;
 import com.github.hanyaeger.api.scenes.TileMapContainer;
 import org.example.GoatQuest;
 import org.example.entities.enemies.Wolf;
 import org.example.entities.goat.Goat;
-import org.example.entities.map.GrassTilemap;
+import org.example.entities.map.tileMaps.GrassTilemap;
+import org.example.entities.map.tileMaps.TilemapLevel1;
 import org.example.text.HealthText;
 
-import java.awt.*;
-
-public class GameScene extends DynamicScene implements TileMapContainer {
+public abstract class Level extends DynamicScene implements TileMapContainer {
 
     private GoatQuest goatQuest;
 
-    public GameScene(GoatQuest goatQuest) {
+    public Level(GoatQuest goatQuest) {
         this.goatQuest = goatQuest;
     }
 
@@ -33,14 +31,15 @@ public class GameScene extends DynamicScene implements TileMapContainer {
         addEntity(healthText);
         var Goat = new Goat(new Coordinate2D(0,getHeight()-100),goatQuest,healthText);
         addEntity(Goat);
-        var Wolf = new Wolf(new Coordinate2D(300,0));
+        var Wolf = new Wolf(new Coordinate2D(0,getHeight()-300));
         addEntity(Wolf);
 
     }
 
     @Override
-    public void setupTileMaps() {
-        var GrassTileMap = new GrassTilemap();
-        addTileMap(GrassTileMap);
-    }
+    public abstract void setupTileMaps();
+//    {
+//        GrassTilemap GrassTileMap = new TilemapLevel1();
+//        addTileMap(GrassTileMap);
+//    }
 }

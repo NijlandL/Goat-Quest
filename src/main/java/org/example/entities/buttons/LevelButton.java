@@ -19,5 +19,6 @@ public class LevelButton extends Button {
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
         goatQuest.setActiveScene(level+1);
+        goatQuest.setCurrentLevel(level+1);
     }
 }

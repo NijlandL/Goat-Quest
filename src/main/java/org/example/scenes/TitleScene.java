@@ -1,5 +1,6 @@
 package org.example.scenes;
 
+import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import javafx.scene.paint.Color;
@@ -24,13 +25,16 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        var startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2 - 80, getHeight()/2), "Start Game");
+        var GameTitle = new GameTitle(new Coordinate2D(getWidth()/2, getHeight()/3), goatQuest);
+        GameTitle.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(GameTitle);
+
+        var startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/3*2), "Start Game");
+        startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(startButton);
 
-        var quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2 - 80, getHeight()/2 + 50), "Quit Game");
+        var quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/4*3), "Quit Game");
+        quitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(quitButton);
-
-        var GameTitle = new GameTitle(new Coordinate2D(getWidth()/2-100, getHeight()/2 - 200), goatQuest);
-        addEntity(GameTitle);
     }
 }
