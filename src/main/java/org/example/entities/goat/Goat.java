@@ -116,7 +116,8 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 setAnchorLocationY(1);
                 break;
             case BOTTOM:
-                setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+               takeDamage(1);
+               setAnchorLocation(new Coordinate2D(0, 600));
                 break;
             case LEFT:
                 setAnchorLocationX(1);
