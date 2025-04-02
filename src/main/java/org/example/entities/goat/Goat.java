@@ -2,11 +2,9 @@ package org.example.entities.goat;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
-import com.github.hanyaeger.api.entities.Collided;
-import com.github.hanyaeger.api.entities.Collider;
-import com.github.hanyaeger.api.entities.Direction;
-import com.github.hanyaeger.api.entities.Newtonian;
+import com.github.hanyaeger.api.entities.*;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
@@ -19,7 +17,7 @@ import org.example.text.HealthText;
 import java.util.List;
 import java.util.Set;
 
-public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided {
+public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided, SceneBorderTouchingWatcher {
 
     private static final int WALKING_SPEED = 3;
     private static final int JUMP_SPEED = 15;
@@ -105,6 +103,27 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
         if (damageCooldown > 0) {
             damageCooldown--;
+        }
+    }
+
+    @Override
+    public void notifyBoundaryTouching(SceneBorder border) {
+        setSpeed(0);
+
+        switch (border) {
+            case TOP:
+                setAnchorLocationY(1);
+                break;
+            case BOTTOM:
+                setAnchorLocationY(getSceneHeight() - getHeight() - 1);
+                break;
+            case LEFT:
+                setAnchorLocationX(1);
+                break;
+            case RIGHT:
+                setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+            default:
+                break;
         }
     }
 }
