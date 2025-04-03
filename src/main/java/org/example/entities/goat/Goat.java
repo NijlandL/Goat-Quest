@@ -87,11 +87,11 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
 
         for (Collider collider : colliders) {
-            if (collider instanceof GrassTopHitbox){
+            if (collider instanceof GrassTopHitbox) {
                 isOnGround = true;
                 setSpeed(getSpeed());
-                setMotion(0.005,180);
-            } else if (collider instanceof GrassHitbox){
+                setMotion(0.01, 180);
+            } else if (collider instanceof GrassHitbox) {
                 System.out.println("GrasBlock geraakt");
                 blockCollision = true;
             }
@@ -110,11 +110,24 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             damageCooldown--;
         }
 
-        if(blockCollision) {
-            setMotion(0,getDirection());
-            if(latestPressedKeys.contains(KeyCode.SPACE)) {
+        if (blockCollision) {
+            if(latestPressedKeys.contains(KeyCode.A)) {
+                setMotion(0, Direction.LEFT);
+                setSpeed(getSpeed());
+            } else if (latestPressedKeys.contains(KeyCode.D)) {
+                setMotion(0, Direction.RIGHT);
+                setSpeed(getSpeed());
+            } else if (latestPressedKeys.contains(KeyCode.SPACE)) {
+                setMotion(0, Direction.DOWN);
+                setSpeed(0);
+            }
+//            setMotion(0, getDirection());
+            if (latestPressedKeys.contains(KeyCode.SPACE) && latestPressedKeys.contains(KeyCode.A)) {
                 setMotion(2, Direction.DOWN);
             }
+//            else if (latestPressedKeys.contains(KeyCode.SPACE) && latestPressedKeys.contains(KeyCode.D)) {
+//                setMotion(2, Direction.DOWN);
+//            }
         }
     }
 
@@ -127,7 +140,8 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 setAnchorLocationY(1);
                 break;
             case BOTTOM:
-                goatQuest.setActiveScene(7);
+                takeDamage(1);
+                setAnchorLocation(new Coordinate2D(0,600));
                 break;
             case LEFT:
                 setAnchorLocationX(1);
