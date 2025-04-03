@@ -21,7 +21,7 @@ import java.util.Set;
 public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided, SceneBorderTouchingWatcher {
 
     private static final int WALKING_SPEED = 3;
-    private static final int JUMP_SPEED = 15;
+    private static final int JUMP_SPEED = 18;
 
     private HealthText healthText;
     GoatQuest goatQuest;
