@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
+import org.example.entities.enemies.Arend;
 import org.example.entities.enemies.Wolf;
 import org.example.entities.map.grassBlock.GrassHitbox;
 import org.example.entities.map.grassBlock.GrassTopHitbox;
@@ -92,7 +93,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 System.out.println("GrasBlock geraakt");
             }
 
-            if (collider instanceof Wolf) {
+            if (collider instanceof Wolf || collider instanceof Arend) {
                 takeDamage(1);
             }
         }
@@ -116,8 +117,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 setAnchorLocationY(1);
                 break;
             case BOTTOM:
-               takeDamage(1);
-               setAnchorLocation(new Coordinate2D(0, 600));
+                goatQuest.setActiveScene(7);
                 break;
             case LEFT:
                 setAnchorLocationX(1);
