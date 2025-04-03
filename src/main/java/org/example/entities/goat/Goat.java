@@ -25,6 +25,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     private HealthText healthText;
     GoatQuest goatQuest;
     private boolean isOnGround = false;
+    private boolean blockCollision = false;
     private double direction = Direction.RIGHT.getValue();
     private int health = 3;
     private Set<KeyCode> latestPressedKeys;
@@ -81,15 +82,17 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     @Override
     public void onCollision(List<Collider> colliders) {
         isOnGround = false;
+        blockCollision = false;
+
 
         for (Collider collider : colliders) {
             if (collider instanceof GrassTopHitbox){
-//                System.out.println("GrassTopHitbox geraakt");
                 isOnGround = true;
                 setSpeed(getSpeed());
-                setMotion(0,180);
+                setMotion(0.005,180);
             } else if (collider instanceof GrassHitbox){
                 System.out.println("GrasBlock geraakt");
+                blockCollision = true;
             }
 
             if (collider instanceof Wolf) {
@@ -104,6 +107,13 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
         if (damageCooldown > 0) {
             damageCooldown--;
+        }
+
+        if(blockCollision) {
+            setMotion(0,getDirection());
+            if(latestPressedKeys.contains(KeyCode.SPACE)) {
+                setMotion(2, Direction.DOWN);
+            }
         }
     }
 
