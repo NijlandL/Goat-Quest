@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import org.example.GoatQuest;
 import org.example.entities.enemies.Arend;
 import org.example.entities.enemies.Wolf;
+import org.example.entities.map.hayBale.HayBale;
 import org.example.entities.map.grassBlock.GrassHitbox;
 import org.example.entities.map.grassBlock.GrassTopHitbox;
 import org.example.text.HealthText;
@@ -27,8 +28,10 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     GoatQuest goatQuest;
     private boolean isOnGround = false;
     private boolean blockCollision = false;
+    private boolean collideWithHayBale = false;
     private double direction = Direction.RIGHT.getValue();
     private int health = 3;
+    private int hayBales = 0;
     private Set<KeyCode> latestPressedKeys;
     private int damageCooldown = 60;
 
@@ -72,7 +75,6 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             health -= amount;
             if (health <= 0) {
                 goatQuest.setActiveScene(7);
-//                health = 0;
             }
             healthText.setHealthText(health);
             damageCooldown = 60;
@@ -84,6 +86,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     public void onCollision(List<Collider> colliders) {
         isOnGround = false;
         blockCollision = false;
+        collideWithHayBale = false;
 
 
         for (Collider collider : colliders) {
@@ -94,6 +97,12 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             } else if (collider instanceof GrassHitbox) {
                 System.out.println("GrasBlock geraakt");
                 blockCollision = true;
+            } else if (collider instanceof HayBale) {
+                if (!collideWithHayBale) {
+                    hayBales+=1;
+                    collideWithHayBale = true;
+                }
+                System.out.println("HayBales " + hayBales);
             }
 
             if (collider instanceof Wolf || collider instanceof Arend) {

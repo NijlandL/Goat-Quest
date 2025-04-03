@@ -15,10 +15,16 @@ public class LevelButton extends Button {
         this.level = level;
     }
 
+    public boolean completedLastLevel() {
+        return goatQuest.getCurrentLevel() == level;
+    }
+
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
-        goatQuest.setActiveScene(level+1);
-        goatQuest.setCurrentLevel(level+1);
+        if(completedLastLevel()) {
+            goatQuest.setActiveScene(level + 1);
+            goatQuest.setCurrentLevel(level + 1);
+        }
     }
 }

@@ -14,6 +14,8 @@ module Goat.Quest {
     opens arendSprite;
     exports org.example.entities.map.grassBlock;
     exports org.example.entities.map.tileMaps;
+//    exports org.example.entities.map;
+    exports org.example.entities.map.hayBale;
 
 
 }

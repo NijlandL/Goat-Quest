@@ -17,7 +17,7 @@ public class GoatQuest extends YaegerGame
         launch(args);
     }
 
-    private int currentLevel = 2;
+    private int currentLevel = 1;
 
     @Override
     public void setupGame() {
