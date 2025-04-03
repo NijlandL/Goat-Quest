@@ -90,7 +90,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             if (collider instanceof GrassTopHitbox) {
                 isOnGround = true;
                 setSpeed(getSpeed());
-                setMotion(0.01, 180);
+                setMotion(0, 180);
             } else if (collider instanceof GrassHitbox) {
                 System.out.println("GrasBlock geraakt");
                 blockCollision = true;

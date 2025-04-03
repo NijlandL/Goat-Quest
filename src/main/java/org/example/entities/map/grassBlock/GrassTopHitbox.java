@@ -16,6 +16,6 @@ public class GrassTopHitbox extends RectangleEntity implements Collider {
         this.width = width;
         setWidth(width);
         setHeight(height);
-        setFill(Color.BLUE);
+        setFill(Color.TRANSPARENT);
     }
 }
