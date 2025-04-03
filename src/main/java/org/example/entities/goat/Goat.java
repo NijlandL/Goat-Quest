@@ -13,39 +13,39 @@ import org.example.entities.enemies.Wolf;
 import org.example.entities.map.hayBale.HayBale;
 import org.example.entities.map.grassBlock.GrassHitbox;
 import org.example.entities.map.grassBlock.GrassTopHitbox;
+import org.example.text.HayBaleText;
 import org.example.text.HealthText;
-
 
 import java.util.List;
 import java.util.Set;
 
-public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided, SceneBorderTouchingWatcher {
+public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian, Collided, SceneBorderTouchingWatcher, Collider {
 
     private static final int WALKING_SPEED = 3;
     private static final int JUMP_SPEED = 18;
 
-    private HealthText healthText;
-    GoatQuest goatQuest;
+    private final HealthText healthText;
+    private final GoatQuest goatQuest;
+    private final HayBaleText hayBalesText;
+
     private boolean isOnGround = false;
-    private boolean blockCollision = false;
-    private boolean collideWithHayBale = false;
     private double direction = Direction.RIGHT.getValue();
     private int health = 3;
     private int hayBales = 0;
     private Set<KeyCode> latestPressedKeys;
     private int damageCooldown = 60;
 
-
-    public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText) {
+    public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText, HayBaleText hayBaleText) {
         super("goatSprite/goatFullSprite.png", initialLocation, new Size(50, 50), 1, 2);
         this.goatQuest = goatQuest;
         this.healthText = healthText;
+        this.hayBalesText = hayBaleText;
+
         healthText.setHealthText(health);
+        hayBaleText.setHayBaleText(hayBales);
 
         setFrictionConstant(0.05);
         setGravityConstant(0.5);
-
-
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
             direction = Direction.LEFT.getValue();
             maximizeMotionInDirection(direction, WALKING_SPEED);
             setCurrentFrameIndex(0);
-        } else if (isOnGround && !(pressedKeys.contains(KeyCode.D) || pressedKeys.contains(KeyCode.A))) {
+        } else if (isOnGround) {
             setSpeed(0);
         }
     }
@@ -81,31 +81,23 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         }
     }
 
-
     @Override
     public void onCollision(List<Collider> colliders) {
         isOnGround = false;
-        blockCollision = false;
-        collideWithHayBale = false;
-
+        boolean collideWithHayBale = false;
 
         for (Collider collider : colliders) {
             if (collider instanceof GrassTopHitbox) {
                 isOnGround = true;
-                setSpeed(getSpeed());
                 setMotion(0, 180);
             } else if (collider instanceof GrassHitbox) {
-                System.out.println("GrasBlock geraakt");
-                blockCollision = true;
-            } else if (collider instanceof HayBale) {
-                if (!collideWithHayBale) {
-                    hayBales+=1;
-                    collideWithHayBale = true;
-                }
-                System.out.println("HayBales " + hayBales);
-            }
-
-            if (collider instanceof Wolf || collider instanceof Arend) {
+                handleBlockCollision(collider);
+            } else if (collider instanceof HayBale && !collideWithHayBale) {
+                hayBales++;
+                collideWithHayBale = true;
+                hayBalesText.setHayBaleText(hayBales);
+                ((HayBale) collider).remove();
+            } else if (collider instanceof Wolf || collider instanceof Arend) {
                 takeDamage(1);
             }
         }
@@ -118,25 +110,38 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         if (damageCooldown > 0) {
             damageCooldown--;
         }
+    }
 
-        if (blockCollision) {
-            if(latestPressedKeys.contains(KeyCode.A)) {
-                setMotion(0, Direction.LEFT);
-                setSpeed(getSpeed());
-            } else if (latestPressedKeys.contains(KeyCode.D)) {
-                setMotion(0, Direction.RIGHT);
-                setSpeed(getSpeed());
-            } else if (latestPressedKeys.contains(KeyCode.SPACE)) {
-                setMotion(0, Direction.DOWN);
-                setSpeed(0);
-            }
-//            setMotion(0, getDirection());
-            if (latestPressedKeys.contains(KeyCode.SPACE) && latestPressedKeys.contains(KeyCode.A)) {
-                setMotion(2, Direction.DOWN);
-            }
-//            else if (latestPressedKeys.contains(KeyCode.SPACE) && latestPressedKeys.contains(KeyCode.D)) {
-//                setMotion(2, Direction.DOWN);
-//            }
+    private void handleBlockCollision(Collider collider) {
+        var goatBox = getBoundingBox();
+        var blockBox = collider.getBoundingBox();
+
+        boolean fromRight = goatBox.getMaxX() > blockBox.getMinX() &&
+                goatBox.getMinX() < blockBox.getMinX() &&
+                goatBox.getMaxY() > blockBox.getMinY() &&
+                goatBox.getMinY() < blockBox.getMaxY() &&
+                direction == Direction.RIGHT.getValue();
+
+        boolean fromLeft = goatBox.getMinX() < blockBox.getMaxX() &&
+                goatBox.getMaxX() > blockBox.getMaxX() &&
+                goatBox.getMaxY() > blockBox.getMinY() &&
+                goatBox.getMinY() < blockBox.getMaxY() &&
+                direction == Direction.LEFT.getValue();
+
+        boolean fromBelow = goatBox.getMinY() < blockBox.getMaxY() &&
+                goatBox.getMaxY() > blockBox.getMaxY() &&
+                goatBox.getMaxX() > blockBox.getMinX() &&
+                goatBox.getMinX() < blockBox.getMaxX();
+
+        if (fromRight) {
+            setAnchorLocationX(blockBox.getMinX() - getWidth() - 1);
+            setSpeed(0);
+        } else if (fromLeft) {
+            setAnchorLocationX(blockBox.getMaxX() + 1);
+            setSpeed(0);
+        } else if (fromBelow) {
+            setAnchorLocationY(blockBox.getMaxY());
+            setMotion(0, Direction.DOWN.getValue());
         }
     }
 
@@ -150,18 +155,17 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 break;
             case BOTTOM:
                 takeDamage(1);
-                setAnchorLocation(new Coordinate2D(0,600));
+                setAnchorLocation(new Coordinate2D(0, 600));
                 break;
             case LEFT:
                 setAnchorLocationX(1);
                 break;
             case RIGHT:
                 setAnchorLocationX(getSceneWidth() - getWidth() - 1);
+                break;
             default:
                 break;
         }
     }
+
 }
-
-
-

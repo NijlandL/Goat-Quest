@@ -8,7 +8,7 @@ import org.example.entities.enemies.Wolf;
 import org.example.entities.enemies.Arend;
 import org.example.entities.goat.Goat;
 import org.example.text.HealthText;
-
+import org.example.text.HayBaleText;
 public abstract class Level extends DynamicScene implements TileMapContainer {
 
     private GoatQuest goatQuest;
@@ -28,7 +28,9 @@ public abstract class Level extends DynamicScene implements TileMapContainer {
 
         var healthText = new HealthText(new Coordinate2D(0,0));
         addEntity(healthText);
-        var Goat = new Goat(new Coordinate2D(0,getHeight()-100),goatQuest,healthText);
+        var hayBaleText = new HayBaleText(new Coordinate2D(0,200));
+        addEntity(hayBaleText);
+        var Goat = new Goat(new Coordinate2D(0,getHeight()-100),goatQuest,healthText,hayBaleText);
         addEntity(Goat);
         var Wolf = new Wolf(new Coordinate2D(0,getHeight()-140));
         addEntity(Wolf);
