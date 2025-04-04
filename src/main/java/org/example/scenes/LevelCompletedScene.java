@@ -29,8 +29,9 @@ public class LevelCompletedScene extends StaticScene {
         mainMenuButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(mainMenuButton);
 
-        Button testButton = new NextLevelButton(goatQuest, new Coordinate2D(10,20));
-        addEntity(testButton);
+        Button NextLevelButton = new NextLevelButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/3*2));
+        NextLevelButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(NextLevelButton);
 
     }
 }

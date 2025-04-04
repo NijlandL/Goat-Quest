@@ -10,7 +10,7 @@ public class NextLevelButton extends Button {
     private int level;
 
     public NextLevelButton(GoatQuest goatQuest, Coordinate2D location) {
-        super(goatQuest, location, "Next Level: ");
+        super(goatQuest, location, "Next Level");
         this.goatQuest = goatQuest;
         level = goatQuest.getCurrentLevel();
 

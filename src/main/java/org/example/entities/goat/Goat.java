@@ -97,6 +97,9 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 collideWithHayBale = true;
                 hayBalesText.setHayBaleText(hayBales);
                 ((HayBale) collider).remove();
+                if (hayBales == 3){
+                    goatQuest.setActiveScene(8);
+                }
             } else if (collider instanceof Wolf || collider instanceof Arend) {
                 takeDamage(1);
             }
