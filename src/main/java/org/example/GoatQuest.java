@@ -18,7 +18,7 @@ public class GoatQuest extends YaegerGame
         launch(args);
     }
 
-    private int currentLevel = 5;
+    private int currentLevel = 1;
     private final int TITLESCENE = 0;
     private final int LEVELSCENE = 6;
     private final int LEVEL1SCENE = 1;
