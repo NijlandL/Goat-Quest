@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 
 public class HayBaleSprite extends SpriteEntity {
 
-    public HayBaleSprite( Coordinate2D initialLocation) {
+    public HayBaleSprite(Coordinate2D initialLocation) {
         super("decoration/grasHaybale.png", initialLocation);
 
     }

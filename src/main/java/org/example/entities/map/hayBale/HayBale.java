@@ -22,7 +22,7 @@ public class HayBale extends CompositeEntity implements Collided, Collider {
 
     @Override
     protected void setupEntities() {
-        HayBaleSprite hayBale = new HayBaleSprite(new Coordinate2D(0,0));
+        HayBaleSprite hayBale = new HayBaleSprite(new Coordinate2D(0, 0));
         addEntity(hayBale);
     }
 }
