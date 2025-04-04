@@ -6,11 +6,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class HayBaleText extends TextEntity {
+public class HayBaleText extends StyledText {
 
     public HayBaleText(Coordinate2D initialLocation) {
         super(initialLocation);
-        setFont(Font.font("Roboto", FontWeight.NORMAL, 20));
         setFill(Color.ORANGE);
     }
 
