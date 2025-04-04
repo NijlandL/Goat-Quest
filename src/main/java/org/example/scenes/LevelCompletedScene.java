@@ -7,6 +7,7 @@ import org.example.GoatQuest;
 import org.example.entities.buttons.Button;
 import org.example.entities.buttons.MainMenuButton;
 import org.example.entities.buttons.NextLevelButton;
+import org.example.text.LevelCompletedText;
 
 public class LevelCompletedScene extends StaticScene {
 
@@ -32,6 +33,10 @@ public class LevelCompletedScene extends StaticScene {
         Button NextLevelButton = new NextLevelButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/3*2));
         NextLevelButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(NextLevelButton);
+
+        var LevelCompleteText = new LevelCompletedText(new Coordinate2D(getWidth()/2,getHeight()/3));
+        LevelCompleteText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(LevelCompleteText);
 
     }
 }

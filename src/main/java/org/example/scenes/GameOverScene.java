@@ -8,6 +8,8 @@ import org.example.GoatQuest;
 import org.example.entities.buttons.Button;
 import org.example.entities.buttons.MainMenuButton;
 import org.example.entities.buttons.RetryLevelButton;
+import org.example.text.GameOverText;
+import org.example.text.LevelCompletedText;
 
 public class GameOverScene extends StaticScene {
 
@@ -32,6 +34,10 @@ public class GameOverScene extends StaticScene {
         Button retryLevelButton = new RetryLevelButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/3*2));
         retryLevelButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(retryLevelButton);
+
+        var GameOverText = new GameOverText(new Coordinate2D(getWidth()/2,getHeight()/3));
+        GameOverText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(GameOverText);
 
     }
 }

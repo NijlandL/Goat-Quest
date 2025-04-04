@@ -33,7 +33,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     private int health = 3;
     private int hayBales = 0;
     private Set<KeyCode> latestPressedKeys;
-    private int damageCooldown = 60;
+    private int damageCooldown = 40;
 
     public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText, HayBaleText hayBaleText) {
         super("goatSprite/goatFullSprite.png", initialLocation, new Size(50, 50), 1, 2);

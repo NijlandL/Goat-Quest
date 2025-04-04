@@ -15,6 +15,6 @@ public class RetryLevelButton extends Button {
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
-        goatQuest.setActiveScene(goatQuest.getCurrentLevel());
+        goatQuest.setActiveScene(goatQuest.getCurrentLevel()+1);
     }
 }
