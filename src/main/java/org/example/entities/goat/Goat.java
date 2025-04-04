@@ -168,4 +168,8 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         }
     }
 
+    public int getHayBales() {
+        return hayBales;
+    }
+
 }
