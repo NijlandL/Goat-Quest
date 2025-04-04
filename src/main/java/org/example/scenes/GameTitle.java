@@ -4,7 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.impl.SpriteEntity;
 import org.example.GoatQuest;
-import org.example.entities.goat.Goat;
+
 
 public class GameTitle extends SpriteEntity {
 

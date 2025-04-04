@@ -9,8 +9,8 @@ public class StartButton extends Button {
 
     GoatQuest goatQuest;
 
-    public StartButton(GoatQuest goatQuest, Coordinate2D initialLocation, String text) {
-        super(goatQuest, initialLocation, text);
+    public StartButton(GoatQuest goatQuest, Coordinate2D initialLocation) {
+        super(goatQuest, initialLocation, "Start Game");
         this.goatQuest = goatQuest;
     }
 

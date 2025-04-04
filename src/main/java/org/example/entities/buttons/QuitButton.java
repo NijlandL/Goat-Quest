@@ -9,8 +9,8 @@ public class QuitButton extends Button {
 
     GoatQuest goatQuest;
 
-    public QuitButton(GoatQuest goatQuest, Coordinate2D initialLocation, String text) {
-        super(goatQuest, initialLocation, text);
+    public QuitButton(GoatQuest goatQuest, Coordinate2D initialLocation) {
+        super(goatQuest, initialLocation, "Quit Game");
         this.goatQuest = goatQuest;
     }
 

@@ -3,8 +3,8 @@ package org.example.scenes;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
-import javafx.scene.paint.Color;
 import org.example.GoatQuest;
+import org.example.entities.buttons.Button;
 import org.example.entities.buttons.QuitButton;
 import org.example.entities.buttons.StartButton;
 
@@ -29,11 +29,11 @@ public class TitleScene extends StaticScene {
         GameTitle.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(GameTitle);
 
-        var startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/3*2), "Start Game");
+        Button startButton = new StartButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/3*2));
         startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(startButton);
 
-        var quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/4*3), "Quit Game");
+        Button quitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2, getHeight()/4*3));
         quitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(quitButton);
     }

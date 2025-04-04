@@ -2,14 +2,12 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
-import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.scenes.StaticScene;
 import org.example.GoatQuest;
 import org.example.entities.buttons.Button;
 import org.example.entities.buttons.MainMenuButton;
 import org.example.entities.buttons.RetryLevelButton;
 import org.example.text.GameOverText;
-import org.example.text.LevelCompletedText;
 
 public class GameOverScene extends StaticScene {
 

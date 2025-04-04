@@ -16,7 +16,7 @@ public class LevelButton extends Button {
     }
 
     public boolean completedLastLevel() {
-        return goatQuest.getCurrentLevel() == level && goatQuest.getCurrentLevel()<5;
+        return goatQuest.getCurrentLevel() == level && goatQuest.getCurrentLevel()<=5;
     }
 
 

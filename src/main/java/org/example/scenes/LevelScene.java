@@ -2,12 +2,10 @@ package org.example.scenes;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.StaticScene;
-import javafx.scene.Scene;
 import org.example.GoatQuest;
 import org.example.entities.buttons.Button;
 import org.example.entities.buttons.LevelButton;
 import org.example.entities.buttons.MainMenuButton;
-import org.example.entities.buttons.NextLevelButton;
 
 public class LevelScene extends StaticScene {
 

@@ -7,7 +7,9 @@ import org.example.GoatQuest;
 import org.example.entities.buttons.Button;
 import org.example.entities.buttons.MainMenuButton;
 import org.example.entities.buttons.NextLevelButton;
+import org.example.entities.buttons.QuitButton;
 import org.example.text.LevelCompletedText;
+import org.example.text.StyledText;
 
 public class LevelCompletedScene extends StaticScene {
 
@@ -24,15 +26,23 @@ public class LevelCompletedScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        Button mainMenuButton = new MainMenuButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/2));
-        mainMenuButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        addEntity(mainMenuButton);
 
-        Button NextLevelButton = new NextLevelButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/3*2));
-        NextLevelButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        addEntity(NextLevelButton);
 
-        var LevelCompleteText = new LevelCompletedText(new Coordinate2D(getWidth()/2,getHeight()/3));
+        if(goatQuest.getCurrentLevel()<5) {
+            Button mainMenuButton = new MainMenuButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/2));
+            mainMenuButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+            addEntity(mainMenuButton);
+
+            Button NextLevelButton = new NextLevelButton(goatQuest, new Coordinate2D(getWidth() / 2, getHeight() / 3 * 2));
+            NextLevelButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+            addEntity(NextLevelButton);
+        } else {
+            Button QuitButton = new QuitButton(goatQuest, new Coordinate2D(getWidth()/2,getHeight()/2));
+            QuitButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+            addEntity(QuitButton);
+        }
+
+        StyledText LevelCompleteText = new LevelCompletedText(new Coordinate2D(getWidth()/2,getHeight()/3));
         LevelCompleteText.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         addEntity(LevelCompleteText);
 
