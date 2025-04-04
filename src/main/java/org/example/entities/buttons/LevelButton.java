@@ -25,6 +25,8 @@ public class LevelButton extends Button {
         if(completedLastLevel()) {
             goatQuest.setActiveScene(level + 1);
             goatQuest.setCurrentLevel(level + 1);
+        } else {
+            System.out.println("Level not unlocked");
         }
     }
 }
