@@ -1,12 +1,13 @@
 package org.example.entities.map.tileMaps;
 
-public class TilemapLevel2 extends GrassTilemap{
-    public TilemapLevel2(){}
+public class TilemapLevel2 extends GrassTilemap {
+    public TilemapLevel2() {
+    }
 
     @Override
     public int[][] defineMap() {
         return new int[][]{
-                // 0 = lucht
+
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
                 {2, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

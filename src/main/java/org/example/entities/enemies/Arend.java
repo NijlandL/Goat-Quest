@@ -34,7 +34,7 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
     public void notifyBoundaryTouching(SceneBorder border) {
         changeDirection(180);
         if (getAnchorLocation().getY() > MAX_Y) {
-            setDirection(360- getDirection());
+            setDirection(360 - getDirection());
 
         }
     }
@@ -67,7 +67,6 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
             }
         }
     }
-
 
 
 }
