@@ -20,7 +20,6 @@ public class NextLevelButton extends Button {
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
         level++;
         goatQuest.setCurrentLevel(level);
-        System.out.println("Current level: " + goatQuest.getCurrentLevel());
         goatQuest.setActiveScene(level);
 
     }

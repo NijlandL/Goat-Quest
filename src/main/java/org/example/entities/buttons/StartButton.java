@@ -16,6 +16,6 @@ public class StartButton extends Button {
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
-        goatQuest.setActiveScene(7);
+        goatQuest.setActiveScene(goatQuest.getLEVELSCENE());
     }
 }

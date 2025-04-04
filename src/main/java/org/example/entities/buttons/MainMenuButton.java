@@ -15,6 +15,6 @@ public class MainMenuButton extends Button {
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
-        goatQuest.setActiveScene(0);
+        goatQuest.setActiveScene(goatQuest.getTITLESCENE());
     }
 }

@@ -76,7 +76,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         if (damageCooldown == 0) {
             health -= amount;
             if (health <= 0) {
-                goatQuest.setActiveScene(8);
+                goatQuest.setActiveScene(goatQuest.getGAMEOVERSCENE());
             }
             healthText.setHealthText(health);
             damageCooldown = 60;
@@ -100,7 +100,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 hayBalesText.setHayBaleText(hayBales);
                 ((HayBale) collider).remove();
                 if (hayBales == 3){
-                    goatQuest.setActiveScene(9);
+                    goatQuest.setActiveScene(goatQuest.getLEVELCOMPLETEDSCENE());
                 }
             } else if (collider instanceof Wolf || collider instanceof Arend) {
                 takeDamage(1);
