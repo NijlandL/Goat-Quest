@@ -34,12 +34,14 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
     private int hayBales = 0;
     private Set<KeyCode> latestPressedKeys;
     private int damageCooldown = 40;
+    private final Coordinate2D spawnLocation;
 
-    public Goat(Coordinate2D initialLocation, GoatQuest goatQuest, HealthText healthText, HayBaleText hayBaleText) {
-        super("goatSprite/goatFullSprite.png", initialLocation, new Size(50, 50), 1, 2);
+    public Goat(GoatQuest goatQuest, Coordinate2D spawnLocation , HealthText healthText, HayBaleText hayBaleText) {
+        super("goatSprite/goatFullSprite.png", spawnLocation, new Size(50, 50), 1, 2);
         this.goatQuest = goatQuest;
         this.healthText = healthText;
         this.hayBalesText = hayBaleText;
+        this.spawnLocation = spawnLocation;
 
         healthText.setHealthText(health);
         hayBaleText.setHayBaleText(hayBales);
@@ -74,6 +76,10 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
         if (damageCooldown == 0) {
             health -= amount;
             if (health <= 0) {
+                if (goatQuest == null) {
+                    System.out.println("Waarschuwing: goatQuest is niet geïnitialiseerd!");
+                }
+
                 goatQuest.setActiveScene(7);
             }
             healthText.setHealthText(health);
@@ -158,7 +164,7 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
                 break;
             case BOTTOM:
                 takeDamage(1);
-                setAnchorLocation(new Coordinate2D(0, 600));
+                setAnchorLocation(spawnLocation);
                 break;
             case LEFT:
                 setAnchorLocationX(1);
@@ -173,6 +179,10 @@ public class Goat extends DynamicSpriteEntity implements KeyListener, Newtonian,
 
     public int getHayBales() {
         return hayBales;
+    }
+
+    public Coordinate2D getSpawnLocation() {
+        return spawnLocation;
     }
 
 }

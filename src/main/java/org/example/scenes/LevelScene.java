@@ -20,7 +20,6 @@ public class LevelScene extends StaticScene {
     @Override
     public void setupScene() {
         setBackgroundImage("backgroundImage.png");
-        setBackgroundAudio("music/GoatQuest Song 1.mp3");
     }
 
     @Override
