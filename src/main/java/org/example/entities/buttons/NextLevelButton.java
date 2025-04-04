@@ -21,7 +21,7 @@ public class NextLevelButton extends Button {
         level++;
         goatQuest.setCurrentLevel(level);
         System.out.println("Current level: " + goatQuest.getCurrentLevel());
-        goatQuest.setActiveScene(level+1);
+        goatQuest.setActiveScene(level);
 
     }
 }

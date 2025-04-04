@@ -16,15 +16,15 @@ public class LevelButton extends Button {
     }
 
     public boolean completedLastLevel() {
-        return goatQuest.getCurrentLevel() == level;
+        return goatQuest.getCurrentLevel() == level && goatQuest.getCurrentLevel()<5;
     }
 
 
     @Override
     public void onMouseButtonPressed(MouseButton button, Coordinate2D coordinate2D) {
         if(completedLastLevel()) {
-            goatQuest.setActiveScene(level + 1);
-            goatQuest.setCurrentLevel(level + 1);
+            goatQuest.setActiveScene(level);
+            goatQuest.setCurrentLevel(level);
         } else {
             System.out.println("Level not unlocked");
         }

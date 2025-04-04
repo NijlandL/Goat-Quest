@@ -30,14 +30,14 @@ public class GoatQuest extends YaegerGame
     @Override
     public void setupScenes(){
         addScene(0, new TitleScene(this));
-        addScene(1,new LevelScene(this));
-        addScene(2, new Level1Scene(this));
-        addScene(3, new Level2Scene(this));
-        addScene(4, new Level3Scene(this));
-        addScene(5, new Level4Scene(this));
-        addScene(6, new Level5Scene(this));
-        addScene(7, new GameOverScene(this));
-        addScene(8, new LevelCompletedScene(this));
+        addScene(7,new LevelScene(this));
+        addScene(1, new Level1Scene(this));
+        addScene(2, new Level2Scene(this));
+        addScene(3, new Level3Scene(this));
+        addScene(4, new Level4Scene(this));
+        addScene(5, new Level5Scene(this));
+        addScene(8, new GameOverScene(this));
+        addScene(9, new LevelCompletedScene(this));
 
     }
 

@@ -29,7 +29,7 @@ public class LevelTimer extends Timer {
 
         if (secondsLeft <= 0) {
             remove();
-            goatQuest.setActiveScene(7); // GameOverScene
+            goatQuest.setActiveScene(8); // GameOverScene
         }
     }
 }
