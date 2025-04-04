@@ -9,45 +9,42 @@ import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.entities.SceneBorderCrossingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
-import org.example.entities.goat.Goat;
-import org.example.entities.map.GrassBlock;
+import org.example.entities.map.grassBlock.GrassBlock;
+import org.example.entities.map.grassBlock.GrassHitbox;
 
 import java.util.List;
 
 public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatcher, Newtonian, Collided, Collider {
 
     private boolean movingRight = true;
-    private int damageCooldown = 0; // frames wachten voor nieuwe damage
+    private final int WALKINGSPEED = 2;
 
     public Wolf(Coordinate2D location) {
         super("wolfSprite/wolf.png", location, new Size(64, 64), 1, 2);
         setGravityConstant(0.5);
         setFrictionConstant(0.05);
-        setMotion(2, Direction.RIGHT.getValue());
+        setMotion(WALKINGSPEED, Direction.RIGHT.getValue());
     }
 
     @Override
     public void notifyBoundaryCrossing(SceneBorder border) {
         if (border == SceneBorder.LEFT || border == SceneBorder.RIGHT) {
-            // Draai om
             movingRight = !movingRight;
             double direction = movingRight ? Direction.RIGHT.getValue() : Direction.LEFT.getValue();
             setMotion(2, direction);
-            setCurrentFrameIndex(movingRight ? 0 : 1); // optioneel sprite omdraaien
+            setCurrentFrameIndex(movingRight ? 0 : 1);
         }
     }
 
     @Override
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
-            if (collider instanceof GrassBlock grassBlock) {
-                double wolfBottom = getBoundingBox().getMaxY();
-                double blockTop = grassBlock.getBoundingBox().getMinY();
-
-                if (wolfBottom <= blockTop + 10) {
-                    setMotion(getSpeed(), getDirection()); // behoud snelheid
-                    break;
-                }
+            if (collider instanceof GrassHitbox) {
+//                setMotion(WALKINGSPEED, -Direction.RIGHT.getValue());
+            }
+            if (collider instanceof GrassHitbox){ //als wolf hitbox raakt dan blijft hij op de hitbox staan ipv de boundingbox van t grasblock
+//                System.out.println("GrassHitbox geraakt");
+                setMotion(getSpeed(), getDirection()); // behoud snelheid
             }
 
         }

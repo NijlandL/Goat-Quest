@@ -3,7 +3,7 @@ module Goat.Quest {
     requires java.desktop;
 
     exports org.example;
-    exports org.example.entities.map;
+//    exports org.example.entities.map;
 
     opens decoration;
     opens goatSprite;
@@ -11,7 +11,11 @@ module Goat.Quest {
     opens tiles;
     opens wolfSprite;
     opens music;
-
+    opens arendSprite;
+    exports org.example.entities.map.grassBlock;
+    exports org.example.entities.map.tileMaps;
+//    exports org.example.entities.map;
+    exports org.example.entities.map.hayBale;
 
 
 }
