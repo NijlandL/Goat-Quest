@@ -3,6 +3,7 @@ package org.example;
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
 import org.example.scenes.GameOverScene;
+import org.example.scenes.LevelCompletedScene;
 import org.example.scenes.levels.*;
 import org.example.scenes.LevelScene;
 import org.example.scenes.TitleScene;
@@ -36,6 +37,7 @@ public class GoatQuest extends YaegerGame
         addScene(5, new Level4Scene(this));
         addScene(6, new Level5Scene(this));
         addScene(7, new GameOverScene(this));
+        addScene(8, new LevelCompletedScene(this));
 
     }
 

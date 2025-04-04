@@ -27,6 +27,7 @@ public abstract class Level extends DynamicScene implements TileMapContainer, Ti
     @Override
     public void setupScene() {
         setBackgroundImage("backgroundImage.png");
+        setBackgroundAudio("music/GoatQuest Song 1.mp3");
     }
 
     @Override
