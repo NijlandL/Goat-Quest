@@ -53,7 +53,7 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
     }
 
     private static class ArendTimer extends Timer {
-        private final Arend arend;
+        private Arend arend;
 
         protected ArendTimer(final Arend arend) {
             super(new Random().nextInt(500) + 300);
@@ -64,11 +64,6 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
         public void onAnimationUpdate(final long timestamp) {
             if (new Random().nextInt(5) < 2) {
                 arend.changeFlightDirection();
-            }
-
-            // Als hij onder de max Y komt, vlieg omhoog
-            if (arend.getAnchorLocation().getY() > MAX_Y) {
-                arend.setDirection(360 - arend.getDirection()); // omkeren verticale richting
             }
         }
     }
