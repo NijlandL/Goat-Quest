@@ -32,7 +32,7 @@ public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatc
             movingRight = !movingRight;
             double direction = movingRight ? Direction.RIGHT.getValue() : Direction.LEFT.getValue();
             setMotion(2, direction);
-            setCurrentFrameIndex(movingRight ? 0 : 1);
+            setCurrentFrameIndex(movingRight ? 1 : 0);
         }
     }
 
@@ -40,13 +40,12 @@ public class Wolf extends DynamicSpriteEntity implements SceneBorderCrossingWatc
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
             if (collider instanceof GrassHitbox) {
-//                setMotion(WALKINGSPEED, -Direction.RIGHT.getValue());
-            }
-            if (collider instanceof GrassHitbox){ //als wolf hitbox raakt dan blijft hij op de hitbox staan ipv de boundingbox van t grasblock
-//                System.out.println("GrassHitbox geraakt");
-                setMotion(getSpeed(), getDirection()); // behoud snelheid
-            }
+                movingRight = !movingRight;
+                double direction = movingRight ? Direction.RIGHT.getValue() : Direction.LEFT.getValue();
+                setMotion(WALKINGSPEED, direction);
 
+                setCurrentFrameIndex(movingRight ? 1 : 0);
+            }
         }
     }
 }

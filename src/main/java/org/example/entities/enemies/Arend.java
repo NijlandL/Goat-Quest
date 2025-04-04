@@ -17,6 +17,7 @@ import java.util.Random;
 public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneBorderTouchingWatcher, Collided, Collider {
 
     private static final int AUTOCYCLE_SPEED = 100;
+    private static final double MAX_Y = 360;
 
     public Arend(final Coordinate2D initialLocation) {
         super("arendSprite/arendSprite.png", initialLocation);
@@ -32,15 +33,17 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
     @Override
     public void notifyBoundaryTouching(SceneBorder border) {
         changeDirection(180);
+        if (getAnchorLocation().getY() > MAX_Y) {
+            setDirection(360- getDirection());
+
+        }
     }
 
     @Override
     public void onCollision(List<Collider> colliders) {
         for (Collider collider : colliders) {
             if (collider instanceof Goat goat) {
-                goat.takeDamage(1); // schade doen
-            } else {
-                changeDirection(180); // botsing = omkeren
+                goat.takeDamage(1);
             }
         }
     }
@@ -50,7 +53,7 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
     }
 
     private static class ArendTimer extends Timer {
-        private Arend arend;
+        private final Arend arend;
 
         protected ArendTimer(final Arend arend) {
             super(new Random().nextInt(500) + 300);
@@ -62,6 +65,14 @@ public class Arend extends DynamicSpriteEntity implements TimerContainer, SceneB
             if (new Random().nextInt(5) < 2) {
                 arend.changeFlightDirection();
             }
+
+            // Als hij onder de max Y komt, vlieg omhoog
+            if (arend.getAnchorLocation().getY() > MAX_Y) {
+                arend.setDirection(360 - arend.getDirection()); // omkeren verticale richting
+            }
         }
     }
+
+
+
 }
