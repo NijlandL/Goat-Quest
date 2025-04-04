@@ -19,7 +19,7 @@ public abstract class Level extends DynamicScene implements TileMapContainer, Ti
     private LevelTimerText levelTimerText;
     private LevelTimer countdownTimer;
     protected HealthText healthText = new HealthText(new Coordinate2D(0,0));
-    protected HayBaleText hayBaleText = new HayBaleText(new Coordinate2D(0,200));
+    protected HayBaleText hayBaleText = new HayBaleText(new Coordinate2D(0,30));
 //    protected Goat goat = new Goat(goatQuest, new Coordinate2D(0,620),healthText, hayBaleText);
 
 

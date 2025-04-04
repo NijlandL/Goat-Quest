@@ -6,12 +6,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class LevelTimerText extends TextEntity {
+public class LevelTimerText extends StyledText {
 
     public LevelTimerText(Coordinate2D location) {
         super(location);
         setFill(Color.WHITE);
-        setFont(Font.font("Roboto", FontWeight.BOLD, 30));
     }
 
     public void setTime(int secondsLeft) {
